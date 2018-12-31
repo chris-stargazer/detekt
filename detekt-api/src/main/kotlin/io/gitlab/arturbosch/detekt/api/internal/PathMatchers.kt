@@ -1,5 +1,7 @@
 package io.gitlab.arturbosch.detekt.api.internal
 
+import org.jetbrains.kotlin.com.intellij.openapi.util.Key
+import org.jetbrains.kotlin.psi.KtFile
 import java.nio.file.FileSystem
 import java.nio.file.FileSystems
 import java.nio.file.PathMatcher
@@ -24,3 +26,9 @@ fun pathMatcher(syntaxAndPattern: String, defaultSyntax: String = "glob"): PathM
 
 	return FileSystems.getDefault().getPathMatcher(result)
 }
+
+fun KtFile.absolutePath(): String? = getUserData(ABSOLUTE_PATH)
+fun KtFile.relativePath(): String? = getUserData(RELATIVE_PATH)
+
+val RELATIVE_PATH: Key<String> = Key("relativePath")
+val ABSOLUTE_PATH: Key<String> = Key("absolutePath")

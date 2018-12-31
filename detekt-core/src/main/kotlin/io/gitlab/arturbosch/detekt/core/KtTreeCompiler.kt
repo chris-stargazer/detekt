@@ -3,6 +3,7 @@ package io.gitlab.arturbosch.detekt.core
 import org.jetbrains.kotlin.psi.KtFile
 import java.nio.file.Files
 import java.nio.file.Path
+import java.util.stream.Collectors
 
 /**
  * @author Artur Bosch
@@ -40,7 +41,7 @@ class KtTreeCompiler(private val compiler: KtCompiler = KtCompiler(),
 			.filter { it.isKotlinFile() }
 			.filter { notIgnored(it) }
 			.map { compiler.compile(project, it) }
-			.toList()
+			.collect(Collectors.toList())
 
 	private fun Path.isKotlinFile(): Boolean {
 		val fullPath = toAbsolutePath().toString()
