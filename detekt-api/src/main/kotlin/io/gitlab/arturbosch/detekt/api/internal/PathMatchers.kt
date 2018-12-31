@@ -21,7 +21,8 @@ fun pathMatcher(syntaxAndPattern: String, defaultSyntax: String = "glob"): PathM
 	val result = when (syntax) {
 		syntaxAndPattern -> assumeDefaultSyntax(syntaxAndPattern)
 		in supportedSyntax -> syntaxAndPattern
-		else -> throw IllegalArgumentException("Unsupported syntax '$syntax' for a PathMatcher. See FileSystem.getPathMatcher.")
+		else -> throw IllegalArgumentException(
+				"Unsupported syntax '$syntax' for a PathMatcher. See FileSystem.getPathMatcher.")
 	}
 
 	return FileSystems.getDefault().getPathMatcher(result)
